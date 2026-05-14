@@ -1,1 +1,1 @@
-# synapserepo
+# azuresynapse
