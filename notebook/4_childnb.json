@@ -4,7 +4,7 @@
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
-			"referenceName": "inceptezspark",
+			"referenceName": "izsparkpool1",
 			"type": "BigDataPoolReference"
 		},
 		"sessionProperties": {
@@ -18,33 +18,33 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "cfca1ff5-9261-4673-976f-5e08afe0b9c4"
+				"spark.autotune.trackingId": "2a173074-4725-4a83-ac9d-0d1cf8e2d1e3"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": {
-				"version": "0.1"
-			},
 			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
 			"language_info": {
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/660da862-ec29-4eb2-a8b7-c87550e4277d/resourceGroups/inceptez-synapse-rg/providers/Microsoft.Synapse/workspaces/inceptezsynapse-ws/bigDataPools/inceptezspark",
-				"name": "inceptezspark",
+				"id": "/subscriptions/e68a829e-83e8-42bc-8494-b4ceb80be6c7/resourceGroups/wd36-rg1/providers/Microsoft.Synapse/workspaces/izsynapseworkspacetest/bigDataPools/izsparkpool1",
+				"name": "izsparkpool1",
 				"type": "Spark",
-				"endpoint": "https://inceptezsynapse-ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/inceptezspark",
+				"endpoint": "https://izsynapseworkspacetest.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/izsparkpool1",
 				"auth": {
 					"type": "AAD",
-					"authResource": "https://dev.azuresynapse.net",
-					"authHeader": null
+					"authResource": "https://dev.azuresynapse.net"
 				},
 				"sparkVersion": "3.5",
 				"nodeCount": 3,
 				"cores": 4,
 				"memory": 28,
-				"extraHeader": null
+				"automaticScaleJobs": false
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -64,7 +64,8 @@
 					"# Click the ... on the cell and select Toggle parameter cell.\n",
 					"p1 = \"\"\n",
 					"p2 = \"\""
-				]
+				],
+				"execution_count": 9
 			},
 			{
 				"cell_type": "code",
@@ -74,7 +75,8 @@
 					"print(f\"The value is: {p1}\")\n",
 					"print(f\"The value is: {p2}\")\n",
 					""
-				]
+				],
+				"execution_count": 8
 			}
 		]
 	}
