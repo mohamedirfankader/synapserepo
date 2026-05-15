@@ -18,7 +18,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "63517a32-1979-489d-b8d7-c510323dfe6b"
+				"spark.autotune.trackingId": "11396f91-54b7-4501-b3e2-10f410dcf47a"
 			}
 		},
 		"metadata": {
@@ -170,6 +170,21 @@
 				"source": [
 					"#Delete file\n",
 					"mssparkutils.fs.rm(\"abfss://raw@batch25synapseadls.dfs.core.windows.net/retaildata/orders.json\")"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"# 1. Define the table reference\n",
+					"# Use the format: <DatabaseName>.<SchemaName>.<TableName>\n",
+					"dedicated_table = \"delsqlpool.dbo.tbl1\"\n",
+					"\n",
+					"# 2. Read the dedicated table into a Spark DataFrame\n",
+					"df = spark.read.synapsesql(dedicated_table)\n",
+					"\n",
+					"# Show data\n",
+					"display(df.limit(10))"
 				],
 				"execution_count": null
 			}
