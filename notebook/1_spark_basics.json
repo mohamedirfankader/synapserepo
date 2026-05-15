@@ -18,33 +18,26 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "4199833a-2697-428b-82f7-a41a8b0be392"
+				"spark.autotune.trackingId": "c4ca38b1-7371-496d-8bc7-f8871733ca57"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": {
-				"version": "0.1"
-			},
 			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
 			"language_info": {
 				"name": "python"
 			},
 			"a365ComputeOptions": {
 				"id": "/subscriptions/660da862-ec29-4eb2-a8b7-c87550e4277d/resourceGroups/inceptez-synapse-rg/providers/Microsoft.Synapse/workspaces/inceptezsynapse-ws/bigDataPools/inceptezspark",
 				"name": "inceptezspark",
-				"type": "Spark",
-				"endpoint": "https://inceptezsynapse-ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/inceptezspark",
 				"auth": {
 					"type": "AAD",
-					"authResource": "https://dev.azuresynapse.net",
-					"authHeader": null
-				},
-				"sparkVersion": "3.5",
-				"nodeCount": 3,
-				"cores": 4,
-				"memory": 28,
-				"extraHeader": null
+					"authResource": "https://dev.azuresynapse.net"
+				}
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -82,25 +75,6 @@
 			{
 				"cell_type": "code",
 				"source": [
-					"from pyspark.sql import SparkSession\n",
-					"\n",
-					"# Create a SparkSession\n",
-					"spark1 = SparkSession.builder.appName(\"synapseworkouts\").getOrCreate()\n",
-					"data = [\n",
-					"    (1, \"Rajesh\", 25),\n",
-					"    (2, \"Vimal\", 30),\n",
-					"    (3, \"Charlie\", 35),\n",
-					"    (4, \"David\", 40)\n",
-					"]\n",
-					"\n",
-					"df = spark.createDataFrame(data, [\"id\", \"name\", \"age\"])\n",
-					"df.show()"
-				],
-				"execution_count": 2
-			},
-			{
-				"cell_type": "code",
-				"source": [
 					"#Read from Data Lake\n",
 					"df = spark.read.format(\"csv\").option(\"inferschema\",True).load(\"abfss://raw@batch25synapseadls.dfs.core.windows.net/txns\") \\\n",
 					".toDF(\"txnid\",\"txndate\",\"custid\",\"amount\",\"category\",\"product\",\"city\",\"state\",\"paytype\")\n",
@@ -114,7 +88,8 @@
 				"source": [
 					"df1 = df.filter(\"state = 'Texas' and paytype = 'credit'\")\n",
 					"df1.show()"
-				]
+				],
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -129,10 +104,28 @@
 				"cell_type": "code",
 				"source": [
 					"#Write into ADLS\n",
-					"df1.write.format(\"parquet\").save(\"abfss://raw@batch25synapseadls.dfs.core.windows.net/salesreport\")\n",
+					"df1.write.format(\"parquet\").save(\"abfss://sourcecontainer1@telecomusecase1.dfs.core.windows.net/outputdir/\")\n",
 					"print(\"Data Written into Data Lake\")"
 				],
 				"execution_count": 6
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"#Read from data lake(External Storage) using Managed Identity\n",
+					"\n",
+					"#Provide Storage blob data contributor access to the synapse workspace idenitity\n",
+					"\n",
+					"# Ensure the path matches the account name above\n",
+					"path = \"abfss://sourcecontainer1@telecomusecase1.dfs.core.windows.net/landing-zone/txns.txt\"\n",
+					"\n",
+					"df = spark.read.format(\"csv\") \\\n",
+					"    .option(\"header\", True) \\\n",
+					"    .option(\"inferSchema\", True) \\\n",
+					"    .load(path)\n",
+					"df.show()"
+				],
+				"execution_count": null
 			}
 		]
 	}
