@@ -18,7 +18,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "c4ca38b1-7371-496d-8bc7-f8871733ca57"
+				"spark.autotune.trackingId": "63517a32-1979-489d-b8d7-c510323dfe6b"
 			}
 		},
 		"metadata": {
@@ -124,6 +124,52 @@
 					"    .option(\"inferSchema\", True) \\\n",
 					"    .load(path)\n",
 					"df.show()"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### mssparkutils - File System(mssparkutils.fs)"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"#List files\n",
+					"from notebookutils import mssparkutils\n",
+					"lst = mssparkutils.fs.ls(\"abfss://sourcecontainer1@telecomusecase1.dfs.core.windows.net\")"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"#View file content\n",
+					"mssparkutils.fs.head(\"abfss://sourcecontainer1@telecomusecase1.dfs.core.windows.net/txns.txt\")"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"#Copy file\n",
+					"mssparkutils.fs.cp(\"abfss://raw@batch25synapseadls.dfs.core.windows.net/orders.json\", \"abfss://raw@batch25synapseadls.dfs.core.windows.net/retaildata/\")"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"#Delete file\n",
+					"mssparkutils.fs.rm(\"abfss://raw@batch25synapseadls.dfs.core.windows.net/retaildata/orders.json\")"
 				],
 				"execution_count": null
 			}
