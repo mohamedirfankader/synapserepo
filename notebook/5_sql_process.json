@@ -18,33 +18,26 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "25d32ca6-db37-46f9-b97d-a2430afd4df9"
+				"spark.autotune.trackingId": "7b2232d0-cd09-4e54-83e1-072459d58dea"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": {
-				"version": "0.1"
-			},
 			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
 			"language_info": {
 				"name": "python"
 			},
 			"a365ComputeOptions": {
 				"id": "/subscriptions/660da862-ec29-4eb2-a8b7-c87550e4277d/resourceGroups/inceptez-synapse-rg/providers/Microsoft.Synapse/workspaces/inceptezsynapse-ws/bigDataPools/inceptezspark",
 				"name": "inceptezspark",
-				"type": "Spark",
-				"endpoint": "https://inceptezsynapse-ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/inceptezspark",
 				"auth": {
 					"type": "AAD",
-					"authResource": "https://dev.azuresynapse.net",
-					"authHeader": null
-				},
-				"sparkVersion": "3.5",
-				"nodeCount": 3,
-				"cores": 4,
-				"memory": 28,
-				"extraHeader": null
+					"authResource": "https://dev.azuresynapse.net"
+				}
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -62,7 +55,8 @@
 					"--Create database\n",
 					"CREATE DATABASE inceptez_salesdb;\n",
 					""
-				]
+				],
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -83,7 +77,8 @@
 				"cell_type": "code",
 				"source": [
 					"spark.sql(\"CREATE DATABASE inceptez_salesdb\")"
-				]
+				],
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -177,6 +172,13 @@
 					"select * from inceptez_salesdb.Orders_delta;"
 				],
 				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					""
+				],
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
